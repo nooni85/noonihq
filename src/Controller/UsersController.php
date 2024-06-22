@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Event\EventInterface;
+use Cake\Core\Configure;
 
 /**
  * Users Controller
@@ -45,15 +46,53 @@ class UsersController extends AppController
      */
     public function join()
     {
-        $user = $this->Users->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+        $userTable = $this->fetchTable('Users');
+        $user = $userTable->newEmptyEntity();
+        $userProfileImg = $userTable->UsersProfileImg->newEmptyEntity();
 
-                return $this->redirect(['action' => 'index']);
+        if ($this->request->is('post')) {
+
+            // valadations
+            if($this->request->getData('profile')->getError() > 0) {
+                $this->Flash->error(__('프로필 사진이 없습니다.'));
+            } else if(strcmp($this->request->getData('password'), $this->request->getData('password-confirm'))!=0) {
+                $this->Flash->error(__('비밀번호가 일치하지 않습니다.'));
+            } else if($user->hasErrors()) {
+                $this->Flash->error($user->getErrors());
+            } else {
+                $profileDir = Configure::read("datadir.profile");
+
+                if(!file_exists($profileDir)) {
+                    mkdir($profileDir, 0777, true);
+                }
+
+                // save profile image
+                $profile = $this->request->getData('profile');
+                $ext = pathinfo($profile->getClientFilename(), PATHINFO_EXTENSION);
+                $profileFileName = $profileDir.DIRECTORY_SEPARATOR.$this->request->getData('username').".".$ext;
+                $profile->moveTo($profileFileName);
+
+                // $profileImgTable = $this->getTableLocator()->get('UsersProfileImg');
+                // $profileImg = $profileImgTable->newEmptyEntity();
+
+                // $user = $this->Users->patchEntity($user, $data);
+                $date = new \DateTime();
+                $now = $date->format('Y-m-d H:i:s');
+
+                $user = $this->Users->patchEntity($user, $this->request->getData());
+                $user->password = password_hash($user->password, PASSWORD_BCRYPT);
+                $userProfileImg->path = $profileFileName;
+                $userProfileImg->type = $profile->getClientMediaType();
+                $userProfileImg->size = $profile->getSize();
+
+                $user->userProfileImg = $userProfileImg;
+
+                if ($this->Users->save($user)) {
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('사용자를 저장할 수 없습니다. 다시 시도해주세요.'));
+      
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $this->set(compact('user'));
 

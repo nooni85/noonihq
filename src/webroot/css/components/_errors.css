@@ -1,0 +1,7 @@
+.error > .form-error {
+	border-color: red;
+}
+
+.error-message {
+	@apply text-danger;
+}

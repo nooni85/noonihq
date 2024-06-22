@@ -7,6 +7,13 @@
  */
 return [
     /*
+     * Data directory:
+    */
+    'datadir' => [
+        'profile' => 'c:\\bigshot\\profile'
+    ],
+
+    /*
      * Debug Level:
      *
      * Production Mode:

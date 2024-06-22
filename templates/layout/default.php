@@ -33,6 +33,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         'vendors/tippy.css',
         'vendors/simplebar.css',
         'themes/dagger.css',
+        'vendors/dropzone.css',
+        'vendors/highlight.css',
         'app.css'])?>
 
     <?= $this->fetch('meta') ?>
@@ -55,7 +57,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                                 </div>
                             </div>
                             <div class="ml-3.5 font-medium transition-opacity group-[.side-menu--collapsed.side-menu--on-hover]:xl:opacity-100 group-[.side-menu--collapsed]:xl:opacity-0">
-                                DAGGER
+                                NOONIHQ
                             </div>
                         </a>
                         <a class="toggle-compact-menu ml-auto hidden h-[20px] w-[20px] items-center justify-center rounded-full border border-slate-600/40 transition-[opacity,transform] hover:bg-slate-600/5 group-[.side-menu--collapsed]:xl:rotate-180 group-[.side-menu--collapsed.side-menu--on-hover]:xl:opacity-100 group-[.side-menu--collapsed]:xl:opacity-0 3xl:flex" href="">

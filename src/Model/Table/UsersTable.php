@@ -40,6 +40,20 @@ class UsersTable extends Table
         $this->setTable('users');
         $this->setDisplayField('username');
         $this->setPrimaryKey('no');
+
+        $this->hasOne('UsersProfileImg')
+            ->setForeignKey('users_no')
+            ->setProperty('userProfileImg')
+            ->setDependent(true);;
+
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'created_at' => 'new',
+                    'updated_at' => 'always'
+                ]
+            ]
+        ]);
     }
 
     /**
@@ -57,17 +71,28 @@ class UsersTable extends Table
             ->notEmptyString('username');
 
         $validator
+            ->scalar('firstname')
+            ->maxLength('firstname', 255)
+            ->requirePresence('firstname', 'create')
+            ->notEmptyString('firstname');
+
+        $validator
+            ->scalar('lastname')
+            ->maxLength('lastname', 255)
+            ->requirePresence('lastname', 'create')
+            ->notEmptyString('lastname');
+
+        $validator
             ->scalar('password')
             ->maxLength('password', 60)
-            ->allowEmptyString('password');
+            ->requirePresence('password', 'create')
+            ->notEmptyString('password');
 
         $validator
-            ->dateTime('created_at')
-            ->allowEmptyDateTime('created_at');
+            ->dateTime('created_at');
 
         $validator
-            ->dateTime('updated_at')
-            ->allowEmptyDateTime('updated_at');
+            ->dateTime('updated_at');
 
         return $validator;
     }

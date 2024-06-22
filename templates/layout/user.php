@@ -12,6 +12,8 @@
         'vendors/litepicker.css',
         'vendors/simplebar.css',
         'themes/dagger.css',
+        'vendors/dropzone.css',
+        'vendors/highlight.css',
         'app.css'])?>
 
     <?= $this->fetch('meta') ?>
@@ -78,8 +80,10 @@
         'vendors/tippy.js',
         'vendors/lucide.js',
         'vendors/modal.js',
+        'vendors/dropzone.js',
         'components/base/theme-color.js',
         'components/base/tippy.js',
+        'components/base/dropzone.js',
         'components/base/lucide.js']) ?>
     <?= $this->fetch('script') ?>
 </body>
