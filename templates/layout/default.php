@@ -306,7 +306,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                             <!-- BEGIN: Notification & User Menu -->
                             <div class="flex items-center flex-1">
                                 <div class="flex items-center gap-1 ml-auto">
-                                    <a class="p-2 rounded-full hover:bg-slate-100" data-tw-toggle="modal" data-tw-target="#activities-panel" href="javascript:;">
+                                    <!-- <a class="p-2 rounded-full hover:bg-slate-100" data-tw-toggle="modal" data-tw-target="#activities-panel" href="javascript:;">
                                         <i data-tw-merge="" data-lucide="layout-grid" class="stroke-[1] h-[18px] w-[18px]"></i>
                                     </a>
                                     <a class="p-2 rounded-full request-full-screen hover:bg-slate-100" href="javascript:;">
@@ -314,10 +314,23 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                                     </a>
                                     <a class="p-2 rounded-full hover:bg-slate-100" data-tw-toggle="modal" data-tw-target="#notifications-panel" href="javascript:;">
                                         <i data-tw-merge="" data-lucide="bell" class="stroke-[1] h-[18px] w-[18px]"></i>
-                                    </a>
+                                    </a> -->
+                                    <?php
+                                        if($this->request->getAttribute('identity') == null) {
+                                            echo $this->Html->link(__('로그인'), ['controller' => 'users', 'action' => 'login'], ['class' => 'p-2 rounded-full hover:bg-slate-100']);
+                                            echo $this->Html->link(__('회원가입'), ['controller' => 'users', 'action' => 'join'], ['class' => 'p-2 rounded-full hover:bg-slate-100']);
+                                        }
+                                    ?>
                                 </div>
-                                <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative ml-5"><button data-tw-toggle="dropdown" aria-expanded="false" class="cursor-pointer image-fit h-[36px] w-[36px] overflow-hidden rounded-full border-[3px] border-slate-200/70"><img src="<?= $this->Url->image('/users/user4-50x50.jpg')?>" alt="Tailwise - Admin Dashboard Template">
-                                    </button>
+                                <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative ml-5">
+                                    <?php
+                                        if($this->request->getAttribute('identity') != null) {
+                                            echo "<button data-tw-toggle=\"dropdown\" aria-expanded=\"false\" class=\"cursor-pointer image-fit h-[36px] w-[36px] overflow-hidden rounded-full border-[3px] border-slate-200/70\"><img src=\"".$this->Url->image('/users/user4-50x50.jpg')."\"alt=\"Tailwise - Admin Dashboard Template\">
+                                                </button>";
+                                        }
+                                    ?>
+                                    
+
                                     <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
                                         <div data-tw-merge="" class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-56 mt-1">
                                             <a data-tw-toggle="modal" data-tw-target="#switch-account" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="toggle-left" class="stroke-[1] w-4 h-4 mr-2"></i>
@@ -334,8 +347,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                                             </div>
                                             <a href="dagger-settings.html" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="users" class="stroke-[1] w-4 h-4 mr-2"></i>
                                                 Profile Info</a>
-                                            <a href="dagger-login.html" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="power" class="stroke-[1] w-4 h-4 mr-2"></i>
-                                                Logout</a>
+                                            <?= $this->Html->link(__('<i data-tw-merge="" data-lucide="power" class="stroke-[1] w-4 h-4 mr-2"></i>로그아웃'), ['controller' => 'users', 'action' => 'logout'], ['escape' => false, 'class' => 'cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item']) ?>
                                         </div>
                                     </div>
                                 </div>

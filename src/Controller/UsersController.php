@@ -163,12 +163,12 @@ class UsersController extends AppController
             //     'action' => 'index',
             // ]);
 
-            return $this->redirect($redirect);
+            return $this->redirect('/');
         }
 
         // display error if user submitted and authentication failed
         if ($this->request->is('post') && !$result->isValid()) {
-            $this->Flash->error(__('Invalid username or password'));
+            $this->Flash->error(__('아이디 또는 비밀번호가 일치하지 않습니다.'));
         }
 
         // Set layout to user
@@ -182,7 +182,7 @@ class UsersController extends AppController
         if ($result && $result->isValid()) {
             $this->Authentication->logout();
 
-            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+            return $this->redirect('/');
         }
     }
 }
