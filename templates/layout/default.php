@@ -46,7 +46,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <div class="fixed top-0 left-0 z-50 h-screen side-menu group side-menu--collapsed">
                 <div class="box fixed inset-x-0 top-0 z-10 flex h-[65px] rounded-none border-x-0 border-t-0">
                     <div class="side-menu__content bg-white flex-none flex items-center z-10 px-5 h-full xl:w-[275px] overflow-hidden relative duration-300 group-[.side-menu--collapsed]:xl:w-[91px] group-[.side-menu--collapsed.side-menu--on-hover]:xl:w-[275px] group-[.side-menu--collapsed.side-menu--on-hover]:xl:shadow-[6px_0_12px_-4px_#0000001f] before:content-[''] before:hidden before:xl:block before:absolute before:right-0 before:border-r before:border-dashed before:border-slate-300/70 before:h-4/6 before:group-[.side-menu--collapsed.side-menu--on-hover]:xl:border-solid before:group-[.side-menu--collapsed.side-menu--on-hover]:xl:h-full">
-                        <a class="hidden items-center transition-[margin] xl:flex group-[.side-menu--collapsed.side-menu--on-hover]:xl:ml-0 group-[.side-menu--collapsed]:xl:ml-2" href="">
+                        <a class="hidden items-center transition-[margin] xl:flex group-[.side-menu--collapsed.side-menu--on-hover]:xl:ml-0 group-[.side-menu--collapsed]:xl:ml-2" href="<?= $_SERVER['CONTEXT_PREFIX']?>">
                             <div class="flex h-[34px] w-[34px] items-center justify-center rounded-lg bg-gradient-to-r from-theme-1 to-theme-2 transition-transform ease-in-out group-[.side-menu--collapsed.side-menu--on-hover]:xl:-rotate-180">
                                 <div class="relative h-[16px] w-[16px] -rotate-45 [&_div]:bg-white">
                                     <div class="absolute inset-y-0 left-0 my-auto h-[75%] w-[21%] rounded-full opacity-50">
@@ -324,12 +324,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                                 </div>
                                 <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative ml-5">
                                     <?php
-                                        if($this->request->getAttribute('identity') != null) {
-                                            echo "<button data-tw-toggle=\"dropdown\" aria-expanded=\"false\" class=\"cursor-pointer image-fit h-[36px] w-[36px] overflow-hidden rounded-full border-[3px] border-slate-200/70\"><img src=\"".$this->Url->image('/users/user4-50x50.jpg')."\"alt=\"Tailwise - Admin Dashboard Template\">
+                                        $identify = $this->request->getAttribute('identity');
+                                        if($identify != null) {
+                                            echo "<button data-tw-toggle=\"dropdown\" aria-expanded=\"false\" class=\"cursor-pointer image-fit h-[36px] w-[36px] overflow-hidden rounded-full border-[3px] border-slate-200/70\"><img src=\"".$this->Url->build(['controller' => 'profile', 'action' => 'view', $identify->no])."\"alt=\"Tailwise - Admin Dashboard Template\">
                                                 </button>";
                                         }
                                     ?>
-                                    
 
                                     <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
                                         <div data-tw-merge="" class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 w-56 mt-1">
@@ -345,8 +345,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                                                 Reset Password</a>
                                             <div class="h-px my-2 -mx-2 bg-slate-200/60 dark:bg-darkmode-400">
                                             </div>
-                                            <a href="dagger-settings.html" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="users" class="stroke-[1] w-4 h-4 mr-2"></i>
-                                                Profile Info</a>
+
+                                            <?= $this->Html->link(__('<i data-tw-merge="" data-lucide="users" class="stroke-[1] w-4 h-4 mr-2"></i>내 정보'), ['controller' => 'profile', 'action' => 'index'], ['escape' => false, 'class' => 'cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item']) ?>
+
                                             <?= $this->Html->link(__('<i data-tw-merge="" data-lucide="power" class="stroke-[1] w-4 h-4 mr-2"></i>로그아웃'), ['controller' => 'users', 'action' => 'logout'], ['escape' => false, 'class' => 'cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item']) ?>
                                         </div>
                                     </div>
