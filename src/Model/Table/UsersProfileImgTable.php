@@ -77,9 +77,9 @@ class UsersProfileImgTable extends Table
             ->notEmptyString('size');
 
         $validator
-            ->integer('users_no')
-            ->requirePresence('users_no', 'create')
-            ->notEmptyString('users_no');
+            ->integer('owner_id')
+            ->requirePresence('owner_id', 'create')
+            ->notEmptyString('owner_id');
 
         $validator
             ->dateTime('created_at');

@@ -30,7 +30,7 @@ class UsersProfileImg extends Entity
         'path' => true,
         'type' => true,
         'size' => true,
-        'users_no' => true,
+        'owner_id' => true,
         'created_at' => true,
         'updated_at' => true,
     ];

@@ -42,9 +42,9 @@ class UsersTable extends Table
         $this->setPrimaryKey('no');
 
         $this->hasOne('UsersProfileImg')
-            ->setForeignKey('users_no')
+            ->setForeignKey('owner_id')
             ->setProperty('userProfileImg')
-            ->setDependent(true);;
+            ->setDependent(true);
 
         $this->addBehavior('Timestamp', [
             'events' => [
