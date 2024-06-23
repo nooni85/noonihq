@@ -15,12 +15,12 @@ class CreateUsersMigration extends AbstractMigration
     public function up(): void
     {
         $table = $this->table('users');
-        $table->addColumn('username','string', ['limit' => 36, 'null' => false])
-            ->addColumn('password','char', ['limit' => 60, 'null' => false])
-            ->addColumn('firstname','string', ['limit' => 255, 'null' => false])
-            ->addColumn('lastname','string', ['limit' => 255, 'null' => false])
-            ->addColumn('updated_at','datetime', ['null' => false])
-            ->addColumn('created_at','datetime', ['null' => false])
+        $table->addColumn('username','string', ['limit' => 36, 'null' => false, 'comment' => '아이디'])
+            ->addColumn('password','char', ['limit' => 60, 'null' => false, 'comment' => '비밀번호'])
+            ->addColumn('firstname','string', ['limit' => 255, 'null' => false, 'comment' => '이름'])
+            ->addColumn('lastname','string', ['limit' => 255, 'null' => false, 'comment' => '이름(성)'])
+            ->addColumn('updated_at','datetime', ['null' => false, 'comment' => '수정일'])
+            ->addColumn('created_at','datetime', ['null' => false, 'comment' => '생성일'])
             ->addIndex('username', ['unique' => true, 'name' => 'uix_users_username'])
             ->create();
     }

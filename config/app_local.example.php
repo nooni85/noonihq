@@ -55,6 +55,8 @@ return [
             'password' => 'secret',
 
             'database' => 'my_app',
+
+            'encoding' => 'utf8mb4',
             /*
              * If not using the default 'public' schema with the PostgreSQL driver
              * set it here.

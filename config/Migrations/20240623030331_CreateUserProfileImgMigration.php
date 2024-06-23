@@ -15,12 +15,12 @@ class CreateUserProfileImgMigration extends AbstractMigration
     public function up(): void
     {
         $table = $this->table('users_profile_img');
-        $table->addColumn('path','string', ['limit' => 255, 'null' => false])
-            ->addColumn('type','string', ['limit' => 255, 'null' => false])
-            ->addColumn('size','integer', ['null' => false])
-            ->addColumn('owner_id','integer', ['signed' => false, 'null' => false])
-            ->addColumn('updated_at','datetime', ['null' => false])
-            ->addColumn('created_at','datetime', ['null' => false])
+        $table->addColumn('path','string', ['limit' => 255, 'null' => false, 'comment' => '경로'])
+            ->addColumn('type','string', ['limit' => 255, 'null' => false, 'comment' => '미디어 타입'])
+            ->addColumn('size','integer', ['null' => false, 'comment' => '파일 사이즈'])
+            ->addColumn('owner_id','integer', ['signed' => false, 'null' => false, 'comment' => '소유자 고유번호'])
+            ->addColumn('updated_at','datetime', ['null' => false, 'comment' => '수정일'])
+            ->addColumn('created_at','datetime', ['null' => false, 'comment' => '생성일'])
             ->addForeignKey('owner_id', 'users', 'id', ['delete' => 'CASCADE', 'update' => 'CASCADE', 'constraint' => 'fk_users_profile_img_owner'])
             ->create();
     }
