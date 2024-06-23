@@ -37,17 +37,14 @@ class UsersProfileImgTable extends Table
     {
         parent::initialize($config);
 
+        $this->setAlias('UsersProfileImg');
         $this->setTable('users_profile_img');
         $this->setDisplayField('path');
-        $this->setPrimaryKey('no');
+        $this->setPrimaryKey('id');
 
-        $this->addBehavior('Timestamp', [
-            'events' => [
-                'Model.beforeSave' => [
-                    'created_at' => 'new',
-                    'updated_at' => 'always'
-                ]
-            ]
+        $this->belongsTo('Users', [
+            'foreignKey' => 'owner_id',
+            'joinType' => 'INNER',
         ]);
     }
 
@@ -77,16 +74,33 @@ class UsersProfileImgTable extends Table
             ->notEmptyString('size');
 
         $validator
-            ->integer('owner_id')
-            ->requirePresence('owner_id', 'create')
+            ->nonNegativeInteger('owner_id')
             ->notEmptyString('owner_id');
 
         $validator
-            ->dateTime('created_at');
+            ->dateTime('updated_at')
+            ->requirePresence('updated_at', 'create')
+            ->notEmptyDateTime('updated_at');
 
         $validator
-            ->dateTime('updated_at');
+            ->dateTime('created_at')
+            ->requirePresence('created_at', 'create')
+            ->notEmptyDateTime('created_at');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules): RulesChecker
+    {
+        $rules->add($rules->existsIn(['owner_id'], 'Users'), ['errorField' => 'owner_id']);
+
+        return $rules;
     }
 }

@@ -54,17 +54,26 @@ class UsersController extends AppController
                 $now = $date->format('Y-m-d H:i:s');
 
                 $user = $this->Users->patchEntity($user, $this->request->getData());
+                $user['updated_at'] = $now;
+                $user['created_at'] = $now;
                 $user->password = password_hash($user->password, PASSWORD_BCRYPT);
                 $userProfileImg->path = $profileFileName;
                 $userProfileImg->type = $profile->getClientMediaType();
                 $userProfileImg->size = $profile->getSize();
+                $userProfileImg['updated_at'] = $now;
+                $userProfileImg['created_at'] = $now;
 
                 $user->userProfileImg = $userProfileImg;
 
                 if ($this->Users->save($user)) {
                     return $this->redirect(['action' => 'index']);
                 }
-                $this->Flash->error(__('사용자를 저장할 수 없습니다. 다시 시도해주세요.'));
+
+                if($user->hasErrors()) {
+                    $this->Flash->error($user->getErrors());
+                } else {
+                    $this->Flash->error(__('사용자를 저장할 수 없습니다. 다시 시도해주세요.'));
+                }
       
             }
         }

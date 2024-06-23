@@ -65,7 +65,7 @@
                                 <?php
                                     $identify = $this->request->getAttribute('identity');
                                     if($identify != null) {
-                                        echo "<img src=\"".$this->Url->build(['controller' => 'profile', 'action' => 'view', $identify->no])."\"alt=\"Tailwise - Admin Dashboard Template\">";
+                                        echo "<img src=\"".$this->Url->build(['controller' => 'profile', 'action' => 'view', $identify->id])."\"alt=\"Tailwise - Admin Dashboard Template\">";
                                     }
                                 ?>
                             </div>

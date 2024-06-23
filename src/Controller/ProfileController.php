@@ -18,12 +18,18 @@ class ProfileController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($no)
+    public function view($id)
     {
         $this->disableAutoRender();
 
-        $usersTable = $this->fetchTable("Users");
-        $user = $usersTable->get($no, contain: ['UsersProfileImg']);
+        $usersTable = $this->fetchTable("users");
+        $user = $usersTable->get($id, contain: ['UsersProfileImg']);
+
+        if($user == null) {
+            throw new NotFoundException(__('User '.$id.' not found'));
+        }
+
+
         $userProfileImg = $user->userProfileImg;
 
         if($userProfileImg == null) {

@@ -326,7 +326,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                                     <?php
                                         $identify = $this->request->getAttribute('identity');
                                         if($identify != null) {
-                                            echo "<button data-tw-toggle=\"dropdown\" aria-expanded=\"false\" class=\"cursor-pointer image-fit h-[36px] w-[36px] overflow-hidden rounded-full border-[3px] border-slate-200/70\"><img src=\"".$this->Url->build(['controller' => 'profile', 'action' => 'view', $identify->no])."\"alt=\"Tailwise - Admin Dashboard Template\">
+                                            echo "<button data-tw-toggle=\"dropdown\" aria-expanded=\"false\" class=\"cursor-pointer image-fit h-[36px] w-[36px] overflow-hidden rounded-full border-[3px] border-slate-200/70\"><img src=\"".$this->Url->build(['controller' => 'profile', 'action' => 'view', $identify->id])."\"alt=\"Tailwise - Admin Dashboard Template\">
                                                 </button>";
                                         }
                                     ?>

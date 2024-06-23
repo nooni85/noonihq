@@ -39,21 +39,12 @@ class UsersTable extends Table
 
         $this->setTable('users');
         $this->setDisplayField('username');
-        $this->setPrimaryKey('no');
+        $this->setPrimaryKey('id');
 
         $this->hasOne('UsersProfileImg')
             ->setForeignKey('owner_id')
             ->setProperty('userProfileImg')
             ->setDependent(true);
-
-        $this->addBehavior('Timestamp', [
-            'events' => [
-                'Model.beforeSave' => [
-                    'created_at' => 'new',
-                    'updated_at' => 'always'
-                ]
-            ]
-        ]);
     }
 
     /**
@@ -66,9 +57,16 @@ class UsersTable extends Table
     {
         $validator
             ->scalar('username')
-            ->maxLength('username', 255)
+            ->maxLength('username', 36)
             ->requirePresence('username', 'create')
-            ->notEmptyString('username');
+            ->notEmptyString('username')
+            ->add('username', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->scalar('password')
+            ->maxLength('password', 60)
+            ->requirePresence('password', 'create')
+            ->notEmptyString('password');
 
         $validator
             ->scalar('firstname')
@@ -83,16 +81,14 @@ class UsersTable extends Table
             ->notEmptyString('lastname');
 
         $validator
-            ->scalar('password')
-            ->maxLength('password', 60)
-            ->requirePresence('password', 'create')
-            ->notEmptyString('password');
+            ->dateTime('updated_at')
+            ->requirePresence('updated_at', 'create')
+            ->notEmptyDateTime('updated_at');
 
         $validator
-            ->dateTime('created_at');
-
-        $validator
-            ->dateTime('updated_at');
+            ->dateTime('created_at')
+            ->requirePresence('created_at', 'create')
+            ->notEmptyDateTime('created_at');
 
         return $validator;
     }

@@ -3,20 +3,20 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\UsersProfileImgTable;
+use App\Model\Table\UsersprofileimgTable;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\UsersProfileImgTable Test Case
+ * App\Model\Table\UsersprofileimgTable Test Case
  */
-class UsersProfileImgTableTest extends TestCase
+class UsersprofileimgTableTest extends TestCase
 {
     /**
      * Test subject
      *
-     * @var \App\Model\Table\UsersProfileImgTable
+     * @var \App\Model\Table\UsersprofileimgTable
      */
-    protected $UsersProfileImg;
+    protected $Usersprofileimg;
 
     /**
      * Fixtures
@@ -24,7 +24,7 @@ class UsersProfileImgTableTest extends TestCase
      * @var list<string>
      */
     protected array $fixtures = [
-        'app.UsersProfileImg',
+        'app.Usersprofileimg',
     ];
 
     /**
@@ -35,8 +35,8 @@ class UsersProfileImgTableTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $config = $this->getTableLocator()->exists('UsersProfileImg') ? [] : ['className' => UsersProfileImgTable::class];
-        $this->UsersProfileImg = $this->getTableLocator()->get('UsersProfileImg', $config);
+        $config = $this->getTableLocator()->exists('Usersprofileimg') ? [] : ['className' => UsersprofileimgTable::class];
+        $this->Usersprofileimg = $this->getTableLocator()->get('Usersprofileimg', $config);
     }
 
     /**
@@ -46,19 +46,8 @@ class UsersProfileImgTableTest extends TestCase
      */
     protected function tearDown(): void
     {
-        unset($this->UsersProfileImg);
+        unset($this->Usersprofileimg);
 
         parent::tearDown();
-    }
-
-    /**
-     * Test validationDefault method
-     *
-     * @return void
-     * @uses \App\Model\Table\UsersProfileImgTable::validationDefault()
-     */
-    public function testValidationDefault(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
     }
 }

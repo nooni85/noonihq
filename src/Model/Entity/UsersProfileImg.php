@@ -8,12 +8,13 @@ use Cake\ORM\Entity;
 /**
  * UsersProfileImg Entity
  *
- * @property int $no
+ * @property int $id
  * @property string $path
  * @property string $type
  * @property int $size
- * @property \Cake\I18n\DateTime $created_at
+ * @property int $owner_id
  * @property \Cake\I18n\DateTime $updated_at
+ * @property \Cake\I18n\DateTime $created_at
  */
 class UsersProfileImg extends Entity
 {
@@ -31,7 +32,7 @@ class UsersProfileImg extends Entity
         'type' => true,
         'size' => true,
         'owner_id' => true,
-        'created_at' => true,
         'updated_at' => true,
+        'created_at' => true,
     ];
 }

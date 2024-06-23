@@ -8,12 +8,15 @@ use Cake\ORM\Entity;
 /**
  * User Entity
  *
- * @property int $no
+ * @property int $id
  * @property string $username
  * @property string $password
- * @property int $profile_img
- * @property \Cake\I18n\DateTime $created_at
+ * @property string $firstname
+ * @property string $lastname
  * @property \Cake\I18n\DateTime $updated_at
+ * @property \Cake\I18n\DateTime $created_at
+ *
+ * @property \App\Model\Entity\UsersProfileImg $userProfileImg
  */
 class User extends Entity
 {
@@ -31,8 +34,9 @@ class User extends Entity
         'password' => true,
         'firstname' => true,
         'lastname' => true,
-        'created_at' => true,
         'updated_at' => true,
+        'created_at' => true,
+        'userProfileImg' => true,
     ];
 
     /**

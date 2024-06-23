@@ -19,12 +19,13 @@ class UsersFixture extends TestFixture
     {
         $this->records = [
             [
-                'no' => 1,
+                'id' => 1,
                 'username' => 'Lorem ipsum dolor sit amet',
                 'password' => '',
-                'profile_img' => 1,
-                'created_at' => '2024-06-22 13:08:21',
-                'updated_at' => '2024-06-22 13:08:21',
+                'firstname' => 'Lorem ipsum dolor sit amet',
+                'lastname' => 'Lorem ipsum dolor sit amet',
+                'updated_at' => '2024-06-23 03:36:11',
+                'created_at' => '2024-06-23 03:36:11',
             ],
         ];
         parent::init();

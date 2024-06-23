@@ -6,9 +6,9 @@ namespace App\Test\Fixture;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
- * UsersProfileImgFixture
+ * UsersprofileimgFixture
  */
-class UsersProfileImgFixture extends TestFixture
+class UsersprofileimgFixture extends TestFixture
 {
     /**
      * Table name
@@ -25,12 +25,13 @@ class UsersProfileImgFixture extends TestFixture
     {
         $this->records = [
             [
-                'no' => 1,
+                'id' => 1,
                 'path' => 'Lorem ipsum dolor sit amet',
                 'type' => 'Lorem ipsum dolor sit amet',
                 'size' => 1,
-                'created_at' => '2024-06-22 13:07:36',
-                'updated_at' => '2024-06-22 13:07:36',
+                'owner_id' => 1,
+                'updated_at' => '2024-06-23 03:36:18',
+                'created_at' => '2024-06-23 03:36:18',
             ],
         ];
         parent::init();
