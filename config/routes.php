@@ -49,6 +49,12 @@ return function (RouteBuilder $routes): void {
      */
     $routes->setRouteClass(DashedRoute::class);
 
+    $routes->prefix('Setting', ['path' => '/setting'], function (RouteBuilder $builder) {
+        // Routes connected here are prefixed with '/admin' and
+        // have the 'param' routing key set.
+        $builder->fallbacks(DashedRoute::class);
+    });
+
     $routes->scope('/', function (RouteBuilder $builder): void {
         /*
          * Here, we are connecting '/' (base path) to a controller called 'Pages',
